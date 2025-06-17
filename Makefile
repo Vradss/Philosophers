@@ -1,3 +1,11 @@
+#Colors
+RED 	= \033[0;91m
+GREEN	= \033[1;92m
+YELLOW	= \033[1;93m
+BLUE	= \033[0;96m
+ORANGE	= \033[0;33m
+GRAY	= \033[0;90m
+
 # Executable name
 NAME = philo
 
@@ -35,23 +43,21 @@ all: $(NAME)
 
 # Linking rule - Takes objects from OBJ_DIR
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	@echo "$(BLUE) $(NAME_PROJECT) --> Created & compiled 👀$(END)"
 
-# Compilation rule for .c files - Places .o files in OBJ_DIR
-# Depends on header in INC_DIR and Makefile itself
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)/philo.h Makefile
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@test -d $(OBJ_DIR) || mkdir $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Clean rule - Removes the OBJ_DIR contents and then the directory
 clean:
-	@echo "Cleaning object files..."
-	@rm -f $(OBJ_DIR)/*
-	@rmdir $(OBJ_DIR) || true
+	@echo "$(GREEN) All objects files deleted 💀💀 $(END)"
+	@rm -rf $(OBJ_DIR)
 
 # Full clean rule - Calls clean and then removes executable
 fclean: clean
-	@echo "Cleaning executable..."
+	@echo "$(RED) $(NAME) deleted 💀💀 $(END)"
 	@rm -f $(NAME)
 
 # Rebuild rule
