@@ -6,7 +6,7 @@
 /*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:06:52 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 16:06:53 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/17 17:34:05 by vrads            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
  * @param table Pointer to the t_table structure to be initialized.
  * @param argc The argument count.
  * @param argv The argument vector.
- * @return 0 if arguments are parsed successfully, 1 on error (invalid arguments).
+ * @return 0 if arguments are parsed successfully,
+	1 on error (invalid arguments).
  */
 static int	parse_args(t_table *table, int argc, char **argv)
 {
@@ -37,9 +38,9 @@ static int	parse_args(t_table *table, int argc, char **argv)
 		table->num_must_eat = ft_atoi(argv[5]);
 	else
 		table->num_must_eat = -1;
-	if (table->num_philos <= 0 || table->time_to_die <= 0 || \
-		table->time_to_eat <= 0 || table->time_to_sleep <= 0 || \
-		(argc == 6 && table->num_must_eat <= 0))
+	if (table->num_philos <= 0 || table->time_to_die <= 0
+		|| table->time_to_eat <= 0 || table->time_to_sleep <= 0 || (argc == 6
+			&& table->num_must_eat <= 0))
 	{
 		printf("Error: Invalid arguments.\n");
 		print_usage();
@@ -58,7 +59,8 @@ static int	parse_args(t_table *table, int argc, char **argv)
  *
  * This function first parses the command-line arguments using `parse_args`.
  * If parsing is successful, it initializes other members of the `t_table`
- * structure to their default values (e.g., start_time to 0, simulation_should_end
+ * structure to their default values (e.g., start_time to 0,
+	simulation_should_end
  * to 0, pointers to NULL, and mutex initialized flags to 0).
  *
  * @param table Pointer to the t_table structure to be initialized.

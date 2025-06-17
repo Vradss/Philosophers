@@ -6,7 +6,7 @@
 /*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:05:49 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 16:05:51 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/17 17:34:15 by vrads            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 void	print_usage(void)
 {
 	printf("Usage: ./philo number_of_philosophers time_to_die time_to_eat "
-		   "time_to_sleep [number_of_times_each_philosopher_must_eat]\n");
+			"time_to_sleep [number_of_times_each_philosopher_must_eat]\n");
 	printf("All time arguments should be in milliseconds.\n");
 }
 
@@ -52,21 +52,17 @@ int	main(int argc, char **argv)
 		print_usage();
 		return (1);
 	}
-
 	if (initialize_simulation(&table, argc, argv) != 0)
 	{
 		cleanup(&table);
 		return (1);
 	}
-
 	if (launch_threads(&table, &monitor_thread) != 0)
 	{
 		cleanup(&table);
 		return (1);
 	}
-
 	pthread_join(monitor_thread, NULL);
-
 	cleanup(&table);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:07:03 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 16:07:04 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/17 17:34:29 by vrads            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static void	handle_single_philosopher(t_philo *philo)
 }
 
 /**
- * @brief Performs one cycle of actions for a philosopher (take forks, eat, sleep, think).
+ * @brief Performs one cycle of actions for a philosopher (take forks, eat,
+	sleep, think).
  *
  * This function orchestrates the sequence of actions a philosopher performs:
  * 1. `take_forks()`: Acquires the necessary forks.
@@ -36,7 +37,8 @@ static void	handle_single_philosopher(t_philo *philo)
  * 3. `sleep_philo()`: Simulates sleeping.
  * 4. `think()`: Simulates thinking.
  * After `take_forks` and each action, it checks if the simulation has ended.
- * If the simulation ends during `take_forks` (before eating), forks are dropped.
+ * If the simulation ends during `take_forks` (before eating),
+	forks are dropped.
  *
  * @param philo Pointer to the t_philo structure for the philosopher.
  * @return 0 if the cycle completed and simulation can continue,
@@ -65,11 +67,13 @@ static int	perform_cycle_actions(t_philo *philo)
  *
  * Initializes the philosopher structure from the argument.
  * Delays the start of even ID philosophers to prevent immediate deadlock.
- * Handles the special case of a single philosopher by calling `handle_single_philosopher`.
+
+	* Handles the special case of a single philosopher by calling `handle_single_philosopher`.
  * For multiple philosophers, it enters a loop, calling `perform_cycle_actions`
  * until the simulation ends.
  *
- * @param arg Pointer to the t_philo structure for this philosopher, passed as `void*`.
+ * @param arg Pointer to the t_philo structure for this philosopher,
+	passed as `void*`.
  * @return NULL when the philosopher's routine is complete or simulation ends.
  */
 void	*philosopher_routine(void *arg)
@@ -79,17 +83,15 @@ void	*philosopher_routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
 		precise_usleep(philo->table->time_to_eat / 10, philo->table);
-
 	if (philo->table->num_philos == 1)
 	{
 		handle_single_philosopher(philo);
 		return (NULL);
 	}
-
 	while (!is_simulation_over(philo->table))
 	{
 		if (perform_cycle_actions(philo))
-			break;
+			break ;
 	}
 	return (NULL);
 }

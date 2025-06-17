@@ -6,7 +6,7 @@
 /*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:07:44 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 16:07:45 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/17 16:42:19 by vrads            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static void	join_philosopher_threads(t_table *table)
  * @brief Destroys all initialized fork mutexes.
  *
  * Iterates up to `table->forks_initialized_count`, destroying each fork mutex.
- * After destroying the mutexes, it frees the memory allocated for the forks array
+ * After destroying the mutexes,
+	it frees the memory allocated for the forks array
  * and resets `table->forks` to NULL and `table->forks_initialized_count` to 0.
  * This function was originally in main.c and is specific to cleanup.
  *
@@ -60,7 +61,8 @@ static void	destroy_main_fork_mutexes(t_table *table)
 }
 
 /**
- * @brief Destroys all initialized utility mutexes (print, simulation end, meal time).
+ * @brief Destroys all initialized utility mutexes (print, simulation end,
+	meal time).
  *
  * Checks if each utility mutex was initialized and, if so, destroys it
  * and resets its initialization flag.
@@ -93,7 +95,8 @@ static void	destroy_all_utility_mutexes(t_table *table)
  * 1. Joins all philosopher threads if philosophers array is allocated.
  * 2. Frees the philosophers array.
  * 3. Destroys and frees fork mutexes if they were initialized.
- * 4. Destroys utility mutexes (print, simulation end, meal time) if initialized.
+ * 4. Destroys utility mutexes (print, simulation end,
+	meal time) if initialized.
  *
  * @param table Pointer to the t_table structure containing all simulation data.
  *              If NULL, the function returns immediately.
@@ -102,18 +105,15 @@ void	cleanup(t_table *table)
 {
 	if (!table)
 		return ;
-
 	if (table->philos)
 	{
 		join_philosopher_threads(table);
 		free(table->philos);
 		table->philos = NULL;
 	}
-
 	if (table->forks && table->forks_initialized_count > 0)
 	{
 		destroy_main_fork_mutexes(table);
 	}
-
 	destroy_all_utility_mutexes(table);
 }

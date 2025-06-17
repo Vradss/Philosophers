@@ -6,7 +6,7 @@
 /*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:07:10 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 16:07:16 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/17 17:35:41 by vrads            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int	ft_atoi(const char *str)
  *
  * @param philo Pointer to the t_philo structure of the philosopher.
  * @param status The status message string to print.
- * @param override_sim_end If non-zero, print status even if simulation_should_end is set
+ * @param override_sim_end If non-zero,
+	print status even if simulation_should_end is set
  *                         (e.g., for death messages).
  */
 void	print_status(t_philo *philo, const char *status, int override_sim_end)
@@ -88,7 +89,6 @@ void	print_status(t_philo *philo, const char *status, int override_sim_end)
 		return ;
 	}
 	pthread_mutex_unlock(&philo->table->sim_end_mutex);
-
 	time_ms = get_time_ms() - philo->table->start_time;
 	pthread_mutex_lock(&philo->table->print_mutex);
 	if (!is_simulation_over(philo->table) || override_sim_end)
@@ -118,32 +118,22 @@ int	is_simulation_over(t_table *table)
 }
 
 /**
- * @brief Provides a more precise microsecond sleep, checking for simulation end.
- *
- * Sleeps for the specified duration in milliseconds (`time_ms`).
- * It converts the duration to microseconds and sleeps in smaller intervals
- * (or the full remaining time if small enough) to allow for more frequent
- * checks of the `is_simulation_over` flag. This helps in making the
- * simulation more responsive to termination conditions.
+ * @brief Simple and precise sleep implementation.
  *
  * @param time_ms The time to sleep in milliseconds.
- * @param table Pointer to the t_table structure, used for `is_simulation_over` check.
+ * @param table Pointer to the t_table structure for simulation checks.
  */
 void	precise_usleep(long long time_ms, t_table *table)
 {
 	long long	start;
 	long long	elapsed;
-	long long	remaining;
 
 	start = get_time_ms();
-	remaining = time_ms * 1000;
-	while (remaining > 0 && !is_simulation_over(table))
+	while (!is_simulation_over(table))
 	{
 		elapsed = get_time_ms() - start;
-		remaining = (time_ms * 1000) - (elapsed * 1000);
-		if (remaining > 100000)
-			usleep(remaining / 2);
-		else if (remaining > 0)
-			usleep(remaining);
+		if (elapsed >= time_ms)
+			break ;
+		usleep(500);
 	}
 }

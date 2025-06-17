@@ -6,7 +6,7 @@
 /*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:07:40 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 16:07:41 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/17 16:45:02 by vrads            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static int	init_sim_end_mutex_internal(t_table *table)
  * @brief Initializes the meal time mutex.
  *
  * This mutex protects access to `last_meal_time` and `meals_eaten` for each
- * philosopher, ensuring thread-safe updates and reads of these critical variables.
+ * philosopher,
+	ensuring thread-safe updates and reads of these critical variables.
  *
  * @param table Pointer to the t_table structure where the mutex is stored.
  * @return 0 if successful, 1 on error from pthread_mutex_init.

@@ -6,7 +6,7 @@
 /*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:07:36 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 16:07:37 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/17 17:33:38 by vrads            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
  * @brief Destroys a specified number of fork mutexes and frees related memory.
  *
  * Iterates `n` times, destroying each fork mutex from index 0 to `n-1`.
- * After destroying the mutexes, it frees the memory allocated for the `table->forks`
- * array, sets `table->forks` to NULL, and `table->forks_initialized_count` to 0.
+ * After destroying the mutexes,
+it frees the memory allocated for the `table->forks`
+ * array, sets `table->forks` to NULL,
+	and `table->forks_initialized_count` to 0.
  * This function is typically called during cleanup or when `init_fork_mutexes`
  * fails partway through initialization.
  *

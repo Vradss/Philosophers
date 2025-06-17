@@ -6,7 +6,7 @@
 /*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:06:59 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 16:07:00 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/17 16:13:35 by vrads            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ void	*monitoring_routine(void *arg)
 			}
 			i++;
 		}
-		usleep(1000);
+		usleep(100);
 		if (is_simulation_over(table))
 			return (NULL);
 	}

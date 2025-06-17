@@ -6,7 +6,7 @@
 /*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:06:01 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 16:06:02 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/17 16:42:33 by vrads            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int	init_philos(t_table *table)
 		table->philos[i].state = THINKING;
 		table->philos[i].table = table;
 		table->philos[i].left_fork = &table->forks[i];
-		table->philos[i].right_fork = &table->forks[(i + 1) % table->num_philos];
+		table->philos[i].right_fork = &table->forks[(i + 1)
+			% table->num_philos];
 		if (table->num_philos == 1)
 			table->philos[i].right_fork = NULL;
 		i++;
