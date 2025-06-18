@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vflorez <vflorez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:07:03 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 17:34:29 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/18 13:23:55 by vflorez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ static int	perform_cycle_actions(t_philo *philo)
  * Initializes the philosopher structure from the argument.
  * Delays the start of even ID philosophers to prevent immediate deadlock.
 
-	* Handles the special case of a single philosopher by calling `handle_single_philosopher`.
+	* Handles the special case of a single philosopher by calling 
+	`handle_single_philosopher`.
  * For multiple philosophers, it enters a loop, calling `perform_cycle_actions`
  * until the simulation ends.
  *

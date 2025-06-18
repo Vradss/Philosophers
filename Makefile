@@ -17,10 +17,6 @@ OBJ_DIR = obj
 # Compiler and flags
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pthread -I$(INC_DIR)
-# For debugging with Valgrind or sanitizers:
-# CFLAGS += -g
-# For testing with sanitizers (example: address sanitizer)
-# CFLAGS += -fsanitize=address
 # CFLAGS = -Wall -Wextra -Werror -pthread -I$(INC_DIR) -g -fsanitize=thread -O1
 
 # Source files - All paths now include SRC_DIR

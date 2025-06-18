@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vflorez <vflorez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:06:59 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 16:13:35 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/18 14:21:40 by vflorez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	check_death(t_philo *philo)
 	pthread_mutex_lock(&philo->table->meal_time_mutex);
 	time_since_last_meal = get_time_ms() - philo->last_meal_time;
 	pthread_mutex_unlock(&philo->table->meal_time_mutex);
-
 	if (time_since_last_meal > philo->table->time_to_die)
 	{
 		pthread_mutex_lock(&philo->table->sim_end_mutex);
@@ -39,7 +38,9 @@ int	check_death(t_philo *philo)
 			philo->table->simulation_should_end = 1;
 			pthread_mutex_unlock(&philo->table->sim_end_mutex);
 			print_status(philo, "died", 1);
+			pthread_mutex_lock(&philo->table->meal_time_mutex);
 			philo->state = DEAD;
+			pthread_mutex_unlock(&philo->table->meal_time_mutex);
 			return (1);
 		}
 		pthread_mutex_unlock(&philo->table->sim_end_mutex);
@@ -49,14 +50,16 @@ int	check_death(t_philo *philo)
 }
 
 /**
- * @brief Checks if a single philosopher is not yet full and simulation is running.
+ * @brief Checks if a single philosopher is not yet
+ * full and simulation is running.
  *
  * This is a helper for `check_all_full`. It checks if the given philosopher
  * has eaten fewer meals than `num_must_eat`. If the philosopher is full and
  * the simulation hasn't ended, their state is updated to FULL.
  *
  * @param philo Pointer to the t_philo structure to check.
- * @return 1 if the philosopher is not full and simulation is running, 0 otherwise
+ * @return 1 if the philosopher is not full and simulation is
+ * running, 0 otherwise
  *         (philosopher is full or simulation has ended).
  */
 static int	is_philo_not_full_and_sim_running(t_philo *philo)
@@ -68,11 +71,12 @@ static int	is_philo_not_full_and_sim_running(t_philo *philo)
 		return (1);
 	}
 	pthread_mutex_unlock(&philo->table->meal_time_mutex);
-
 	pthread_mutex_lock(&philo->table->sim_end_mutex);
 	if (!philo->table->simulation_should_end)
 	{
+		pthread_mutex_lock(&philo->table->meal_time_mutex);
 		philo->state = FULL;
+		pthread_mutex_unlock(&philo->table->meal_time_mutex);
 	}
 	pthread_mutex_unlock(&philo->table->sim_end_mutex);
 	return (0);
@@ -85,7 +89,8 @@ static int	is_philo_not_full_and_sim_running(t_philo *philo)
  * `all_philos_are_full_flag` is true and the simulation hasn't already ended.
  *
  * @param table Pointer to the t_table structure.
- * @param all_philos_are_full_flag Integer flag (1 if all philosophers are full, 0 otherwise).
+ * @param all_philos_are_full_flag Integer flag
+ * (1 if all philosophers are full, 0 otherwise).
  * @return 1 if the simulation was ended by this call, 0 otherwise.
  */
 static int	finalize_if_all_full(t_table *table, int all_philos_are_full_flag)
@@ -129,7 +134,7 @@ int	check_all_full(t_table *table)
 		if (is_philo_not_full_and_sim_running(&table->philos[i]))
 		{
 			all_philos_considered_full = 0;
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -141,9 +146,11 @@ int	check_all_full(t_table *table)
  *
  * Continuously checks the status of all philosophers. In each iteration:
  * 1. It checks each philosopher for death using `check_death`.
- * 2. It checks if all philosophers are full using `check_all_full` (if applicable).
- * If either condition causes the simulation to end, the monitoring routine exits.
- * A small delay (`usleep`) is introduced to prevent busy-waiting and reduce CPU usage.
+ * 2. It checks if all philosophers are full using `check_all_full
+ * If either condition causes the simulation to end,
+ * the monitoring routine exits.
+ * A small delay (`usleep`) is introduced to prevent
+ * busy-waiting and reduce CPU usage.
  * It also checks `is_simulation_over` periodically to exit if another thread
  * (like a failed philosopher thread creation) has ended the simulation.
  *

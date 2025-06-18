@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vflorez <vflorez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:05:49 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 17:44:16 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/18 13:24:15 by vflorez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 void	print_usage(void)
 {
 	printf("Usage: ./philo number_of_philosophers time_to_die time_to_eat "
-			"time_to_sleep [number_of_times_each_philosopher_must_eat]\n");
+		"time_to_sleep [number_of_times_each_philosopher_must_eat]\n");
 	printf("All time arguments should be in milliseconds.\n");
 }
 

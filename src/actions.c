@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vflorez <vflorez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:06:08 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 16:41:44 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/18 14:07:25 by vflorez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	take_forks(t_philo *philo)
  * If the simulation is not over, this function:
  * 1. Prints an "is eating" status.
  * 2. Updates the philosopher's state to EATING.
-
-	* 3. Locks the meal_time_mutex to safely update `last_meal_time` and `meals_eaten`.
+ * 3. Locks the meal_time_mutex to safely update `last_meal_time` 
+ * and `meals_eaten`.
  * 4. Simulates the eating duration using `precise_usleep`.
  * 5. Calls `drop_forks` to release the forks.
  * 6. Sets the philosopher's state to SLEEPING.
@@ -76,14 +76,16 @@ void	eat(t_philo *philo)
 	if (is_simulation_over(philo->table))
 		return ;
 	print_status(philo, "is eating", 0);
-	philo->state = EATING;
 	pthread_mutex_lock(&philo->table->meal_time_mutex);
+	philo->state = EATING;
 	philo->last_meal_time = get_time_ms();
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->table->meal_time_mutex);
 	precise_usleep(philo->table->time_to_eat, philo->table);
 	drop_forks(philo);
+	pthread_mutex_lock(&philo->table->meal_time_mutex);
 	philo->state = SLEEPING;
+	pthread_mutex_unlock(&philo->table->meal_time_mutex);
 }
 
 /**
@@ -92,8 +94,8 @@ void	eat(t_philo *philo)
  * If the simulation is not over, this function:
  * 1. Prints an "is sleeping" status.
  * 2. Simulates the sleeping duration using `precise_usleep`.
-
-	* The philosopher's state is expected to be set to SLEEPING prior to calling this,
+ * The philosopher's state is expected to be set 
+	to SLEEPING prior to calling this,
  * typically after eating.
  *
  * @param philo Pointer to the t_philo structure representing the philosopher.
@@ -126,7 +128,9 @@ void	think(t_philo *philo)
 	if (is_simulation_over(philo->table))
 		return ;
 	print_status(philo, "is thinking", 0);
+	pthread_mutex_lock(&philo->table->meal_time_mutex);
 	philo->state = THINKING;
+	pthread_mutex_unlock(&philo->table->meal_time_mutex);
 	if (philo->table->num_philos > 1
 		&& philo->table->time_to_eat > philo->table->time_to_sleep)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_utility_mutexes.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vflorez <vflorez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:07:40 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 16:45:02 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/18 13:23:06 by vflorez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ static int	init_meal_time_mutex_internal(t_table *table)
  *
  * Sequentially initializes the print mutex, then the simulation end mutex,
  * and finally the meal time mutex. If any initialization fails, it attempts
- * to destroy any previously successfully initialized utility mutexes in this function
+ * to destroy any previously successfully initialized 
+ * utility mutexes in this function
  * before returning an error.
  *
  * @param table Pointer to the t_table structure to store the mutexes.

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread_management.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vflorez <vflorez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:05:54 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 17:34:37 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/18 13:22:06 by vflorez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,11 @@ int	initialize_simulation(t_table *table, int argc, char **argv)
  *
  * @param table Pointer to the t_table structure.
 
-	* @param failed_philo_idx Index of the philosopher whose thread creation failed.
+	* @param failed_philo_idx Index of the philosopher whose thread 
+	creation failed.
 
-	* @param num_created_threads Number of philosopher threads successfully created before the failure.
+	* @param num_created_threads Number of philosopher threads 
+	successfully created before the failure.
  */
 static void	handle_thread_creation_error(t_table *table, int failed_philo_idx,
 		int num_created_threads)
@@ -71,16 +73,17 @@ static void	handle_thread_creation_error(t_table *table, int failed_philo_idx,
  * Iterates from 0 to `table->num_philos - 1`. In each iteration:
  * 1. Sets the philosopher's `last_meal_time` to the simulation `start_time`.
 
-	* 2. Attempts to create a new thread for the philosopher using `pthread_create`,
+	* 2. Attempts to create a new thread for the philosopher using 
+	`pthread_create`,
  *    with `philosopher_routine` as the thread function.
  * 3. If thread creation fails, calls `handle_thread_creation_error` to manage
  *    the error and cleanup, then returns 1.
  * 4. Marks the philosopher's thread as valid upon successful creation.
  *
-
-	* @param table Pointer to the t_table structure containing philosopher data and settings.
-
-	* @param start_time The official start time of the simulation (in milliseconds).
+ * @param table Pointer to the t_table structure containing philosopher 
+	data and settings.
+ * @param start_time The official start time of the simulation 
+	(in milliseconds).
  * @return 0 if all philosopher threads are created successfully, 1 on error.
  */
 static int	create_philosopher_threads(t_table *table, long long start_time)
@@ -107,8 +110,9 @@ static int	create_philosopher_threads(t_table *table, long long start_time)
  * @brief Creates and launches the monitoring thread.
  *
 
-	* Attempts to create a new thread for the monitoring routine. If creation fails,
- * it prints an error message and sets the simulation end flag.
+ * Attempts to create a new thread for the monitoring routine. 
+ * If creation fails, it prints an error message and sets 
+ * the simulation end flag.
  *
  * @param table Pointer to the t_table structure.
  * @param monitor_thread_id Pointer to a pthread_t variable where the ID of the
@@ -132,16 +136,19 @@ int	create_monitor_thread(t_table *table, pthread_t *monitor_thread_id)
  * @brief Launches all threads for the simulation (philosophers and monitor).
  *
 
-	* 1. Records the simulation start time using `get_time_ms()` and stores it in `table->start_time`.
+	* 1. Records the simulation start time using `get_time_ms()` and stores 
+	it in `table->start_time`.
 
-	* 2. Calls `create_philosopher_threads` to create and start all philosopher threads.
+	* 2. Calls `create_philosopher_threads` to create and start all 
+	philosopher threads.
  *    If this fails, returns 1.
  * 3. Calls `create_monitor_thread` to create and start the monitoring thread.
  *    If this fails, returns 1.
  *
  * @param table Pointer to the t_table structure.
 
-	* @param monitor_thread_id Pointer to a pthread_t variable for storing the monitor thread ID.
+	* @param monitor_thread_id Pointer to a pthread_t variable for storing 
+	the monitor thread ID.
  * @return 0 if all threads are launched successfully, 1 on any error.
  */
 int	launch_threads(t_table *table, pthread_t *monitor_thread_id)
