@@ -6,7 +6,7 @@
 /*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:06:52 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 17:34:05 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/17 18:06:48 by vrads            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	parse_args(t_table *table, int argc, char **argv)
 	if (table->num_philos > 200)
 	{
 		printf("Error: Number of philosophers cannot exceed 200.\n");
+		print_usage();
 		return (1);
 	}
 	return (0);

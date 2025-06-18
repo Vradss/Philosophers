@@ -21,6 +21,7 @@ CFLAGS = -Wall -Wextra -Werror -pthread -I$(INC_DIR)
 # CFLAGS += -g
 # For testing with sanitizers (example: address sanitizer)
 # CFLAGS += -fsanitize=address
+# CFLAGS = -Wall -Wextra -Werror -pthread -I$(INC_DIR) -g -fsanitize=thread -O1
 
 # Source files - All paths now include SRC_DIR
 SRCS =	$(SRC_DIR)/main.c \

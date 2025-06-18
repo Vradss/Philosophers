@@ -6,7 +6,7 @@
 /*   By: vrads <vrads@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:05:49 by vrads             #+#    #+#             */
-/*   Updated: 2025/06/17 17:34:15 by vrads            ###   ########.fr       */
+/*   Updated: 2025/06/17 17:44:16 by vrads            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	main(int argc, char **argv)
 	}
 	if (initialize_simulation(&table, argc, argv) != 0)
 	{
-		cleanup(&table);
 		return (1);
 	}
 	if (launch_threads(&table, &monitor_thread) != 0)
